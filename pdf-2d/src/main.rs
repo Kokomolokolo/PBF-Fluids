@@ -3,10 +3,10 @@ use std::collections::HashMap;
 
 const PARTICLE_RADIUS: f32 = 0.1;
 const H: f32 = PARTICLE_RADIUS * 4.0; // Smoothing radius
-const REST_DENSITY: f32 = 1.0;
-const EPSILON: f32 = 0.0001;
+const REST_DENSITY: f32 = 50.0;
+const EPSILON: f32 = 100.0;
 const SOLVER_ITERATIONS: usize = 4;
-const GRAVITY: Vec2 = Vec2::new(0.0, -9.81);
+const GRAVITY: Vec2 = Vec2::new(0.0, -10.0);
 const DT: f32 = 0.016;
 
 
@@ -226,7 +226,7 @@ async fn main() {
 
         let scale = (screen_width() / sim_bounds.x).min(screen_height() / sim_bounds.y) * 0.9;
 
-        draw_rectangle_lines(0.0, 0.0, sim_bounds.x * scale, sim_bounds.y * scale, 2.0, DARKGRAY);
+        draw_rectangle_lines(0.0, sim_bounds.y * scale, sim_bounds.x * scale, sim_bounds.y * scale, 2.0, DARKGRAY);
 
         simulation.step();
         simulation.draw(scale);
